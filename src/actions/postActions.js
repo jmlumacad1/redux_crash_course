@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST } from './types';
+import { FETCH_POSTS, NEW_POST } from './types'
 
 export const fetchPosts = () => dispatch => {
   fetch('https://jsonplaceholder.typicode.com/posts')
@@ -8,8 +8,8 @@ export const fetchPosts = () => dispatch => {
         type: FETCH_POSTS,
         payload: posts
       })
-    );
-};
+    )
+}
 
 export const createPost = postData => dispatch => {
   fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -25,5 +25,5 @@ export const createPost = postData => dispatch => {
         type: NEW_POST,
         payload: post
       })
-    );
-};
+    )
+}

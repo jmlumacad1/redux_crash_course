@@ -1,18 +1,29 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from './reducers';
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { FETCH_POSTS, NEW_POST } from './actions/types'
 
-const initialState = {};
+const initialState = {
+  posts: [],
+  newPost: {}
+}
 
-const middleware = [thunk];
+const rootReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case FETCH_POSTS:
+      return {
+        ...state,
+        posts: action.payload
+      }
+    case NEW_POST:
+      return {
+        ...state,
+        newPost: action.payload
+      }
+    default:
+      return state
+  }
+}
 
-const store = createStore(
-  rootReducer,
-  initialState,
-  compose(
-    applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
-export default store;
+export default store
